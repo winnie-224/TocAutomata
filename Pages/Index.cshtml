@@ -1,0 +1,96 @@
+@page
+@model IndexModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TOC Studio</title>
+</head>
+<body>
+
+<h2>Theory of Computation</h2>>
+<p><b>1. Finite DFA Simulator</p>
+<table style="width:100%; margin:auto;" border="1">
+<tr>
+    <th style="width:40%">Input</th>
+    <th>Output</th>
+</tr>
+<tr>
+<td>
+    <form method="post">
+        @Html.AntiForgeryToken()
+
+        <h3>States</h3>
+        <input type="text" name="States" placeholder="q0,q1,q2" />
+
+        <h3>Start State</h3>
+        <input type="text" name="StartState" placeholder="q0" />
+
+        <h3>Final States</h3>
+        <input type="text" name="FinalStates" placeholder="q2" />
+
+        <h3>Transitions</h3>
+        <textarea name="Transitions" rows="8" cols="40"
+        placeholder="q0,0,q1
+q0,1,q1
+q1,0,q2
+q1,1,q1"></textarea>
+
+        <h3>Input String</h3>
+        <input type="text" name="Input" placeholder="101" />
+
+        <br /><br />
+        <button type="submit">Run</button>
+    </form>
+</td>
+
+<td style="text-align:center">
+
+@if (Model.Error != null)
+{
+    <div style="color:red;font-weight:bold">
+        Error: @Model.Error
+    </div>
+}
+
+@if (Model.Result != null)
+{
+    <h2>Result: @Model.Result</h2>
+}
+<h2>Transition Table</h2>
+<table border="1" style="margin:auto;">
+    <tr><th>State</th>
+         @foreach (var symbol in Model.AlphabetList)
+        {
+            <th>@symbol</th>
+        }
+        @foreach (var state in Model.StatesList)
+        {
+            <tr>
+                <td>
+                    @(state.Name == Model.ModelStartState ? "→ " : "")
+                    @(state.IsFinal ? "* " : "")
+                    @state.Name
+                </td>
+
+                @foreach (var symbol in Model.AlphabetList)
+                {
+                    <td>
+                        @Model.GetTransition(state.Name, symbol)
+                    </td>
+                }
+            </tr>
+        }
+    </tr>
+</table>
+
+
+</td>
+</tr>
+</table>
+
+<script>
+</script>
+
+</body>
+</html>

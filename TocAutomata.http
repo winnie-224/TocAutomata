@@ -1,0 +1,6 @@
+@TocAutomata_HostAddress = http://localhost:5249
+
+GET {{TocAutomata_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
