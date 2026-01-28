@@ -24,3 +24,5 @@ Built using **ASP.NET Core Razor Pages**.
 - State transition table (formal δ function view)
 - Error handling for invalid definitions
 
+
+URL : https://tocautomata-production.up.railway.app
